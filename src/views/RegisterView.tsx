@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import type { RegisterFormProps } from "../types";
 import ErrorMessage from "../components/errorMessage";
 
 export default function RegisterView() {
@@ -19,12 +20,12 @@ export default function RegisterView() {
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: initialValues });
+  } = useForm<RegisterFormProps>({ defaultValues: initialValues });
 
   const password = watch("password");
 
-  const handleRegister = () => {
-    console.log("From handleRegister");
+  const handleRegister = (formData: RegisterFormProps) => {
+    console.log(formData);
   };
 
   const [showNewPassword, setShowNewPassword] = useState(false);
