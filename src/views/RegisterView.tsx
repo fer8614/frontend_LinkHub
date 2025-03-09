@@ -21,7 +21,7 @@ export default function RegisterView() {
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
 
-  console.log(errors);
+  const password = watch("password");
 
   const handleRegister = () => {
     console.log("From handleRegister");
@@ -60,7 +60,13 @@ export default function RegisterView() {
             type="email"
             placeholder="Registration Email"
             className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
-            {...register("email", { required: "Email is required" })}
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Invalid email address",
+              },
+            })}
           />
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </div>
@@ -89,7 +95,13 @@ export default function RegisterView() {
               type={showNewPassword ? "text" : "password"}
               placeholder="Registration Password"
               className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400 w-full"
-              {...register("password", { required: "Password is required" })}
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters long",
+                },
+              })}
             />
             <button
               type="button"
@@ -119,6 +131,8 @@ export default function RegisterView() {
               className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400 w-full"
               {...register("password_confirmation", {
                 required: "Password confirmation is required",
+                validate: (value) =>
+                  value === password || "Passwords do not match",
               })}
             />
             <button
