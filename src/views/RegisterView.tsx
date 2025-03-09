@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export default function RegisterView() {
   const {
@@ -14,6 +17,9 @@ export default function RegisterView() {
   const handleRegister = () => {
     console.log("From handleRegister");
   };
+
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
     <>
@@ -63,13 +69,22 @@ export default function RegisterView() {
           <label htmlFor="password" className="text-2xl text-slate-500">
             Password
           </label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Registration Password"
-            className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
-            {...register("password", { required: "Password is required" })}
-          />
+          <div className="relative">
+            <input
+              id="password"
+              type={showNewPassword ? "text" : "password"}
+              placeholder="Registration Password"
+              className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400 w-full"
+              {...register("password", { required: "Password is required" })}
+            />
+            <button
+              type="button"
+              onClick={() => setShowNewPassword(!showNewPassword)}
+              className="absolute inset-y-0 right-0 p-3"
+            >
+              <FontAwesomeIcon icon={showNewPassword ? faEyeSlash : faEye} />
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 space-y-3">
@@ -79,15 +94,26 @@ export default function RegisterView() {
           >
             Repeat Password
           </label>
-          <input
-            id="password_confirmation"
-            type="password"
-            placeholder="Repeat Password"
-            className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
-            {...register("password_confirmation", {
-              required: "Password confirmation is required",
-            })}
-          />
+          <div className="relative">
+            <input
+              id="password_confirmation"
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Repeat Password"
+              className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400 w-full"
+              {...register("password_confirmation", {
+                required: "Password confirmation is required",
+              })}
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute inset-y-0 right-0 p-3"
+            >
+              <FontAwesomeIcon
+                icon={showConfirmPassword ? faEyeSlash : faEye}
+              />
+            </button>
+          </div>
         </div>
 
         <input
