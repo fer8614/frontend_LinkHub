@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import axios, { isAxiosError } from "axios";
 import type { RegisterFormProps } from "../types";
 import ErrorMessage from "../components/errorMessage";
 
@@ -24,8 +25,18 @@ export default function RegisterView() {
 
   const password = watch("password");
 
-  const handleRegister = (formData: RegisterFormProps) => {
-    console.log(formData);
+  const handleRegister = async (formData: RegisterFormProps) => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:4000/auth/register",
+        formData,
+      );
+      console.log(data);
+    } catch (error) {
+      if (isAxiosError(error) && error.response) {
+        console.log(error.response.data.error);
+      }
+    }
   };
 
   const [showNewPassword, setShowNewPassword] = useState(false);
