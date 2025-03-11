@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import axios, { isAxiosError } from "axios";
+import { isAxiosError } from "axios";
 import { toast } from "sonner";
 import type { RegisterFormProps } from "../types";
 import ErrorMessage from "../components/errorMessage";
+import api from "../config/axios";
 
 export default function RegisterView() {
   const initialValues = {
@@ -29,10 +30,7 @@ export default function RegisterView() {
 
   const handleRegister = async (formData: RegisterFormProps) => {
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/auth/register`,
-        formData,
-      );
+      const { data } = await api.post(`/auth/register`, formData);
       toast.success(data);
       reset();
     } catch (error) {
