@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import axios, { isAxiosError } from "axios";
+import { toast } from "sonner";
 import type { RegisterFormProps } from "../types";
 import ErrorMessage from "../components/errorMessage";
 
@@ -32,11 +33,11 @@ export default function RegisterView() {
         `${import.meta.env.VITE_API_URL}/auth/register`,
         formData,
       );
-      console.log(data);
+      toast.success(data);
       reset();
     } catch (error) {
       if (isAxiosError(error) && error.response) {
-        console.log(error.response.data.error);
+        toast.error(error.response.data.error);
       }
     }
   };
