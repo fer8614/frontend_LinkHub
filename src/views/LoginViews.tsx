@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import ErrorMessage from "../components/errorMessage";
 import { LoginFormProps } from "../types";
+import api from "../config/axios";
+import { isAxiosError } from "axios";
+import { useState } from "react";
 
 export default function LoginView() {
   const initialValues: LoginFormProps = {
@@ -17,9 +23,18 @@ export default function LoginView() {
     defaultValues: initialValues,
   });
 
-  const handleLogin = (formData: LoginFormProps) => {
-    console.log(formData);
+  const handleLogin = async (formData: LoginFormProps) => {
+    try {
+      const { data } = await api.post(`/auth/login`, formData);
+      toast.success(data);
+    } catch (error) {
+      if (isAxiosError(error) && error.response) {
+        toast.error(error.response.data.error);
+      }
+    }
   };
+
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
 
   return (
     <>
@@ -53,15 +68,26 @@ export default function LoginView() {
           <label htmlFor="password" className="text-2xl text-slate-500">
             Password
           </label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Password de Registro"
-            className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
-            {...register("password", {
-              required: "El Password es obligatorio",
-            })}
-          />
+          <div className="relative">
+            <input
+              id="password"
+              type={showCurrentPassword ? "text" : "password"}
+              placeholder="Password de Registro"
+              className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400 w-full"
+              {...register("password", {
+                required: "El Password es obligatorio",
+              })}
+            />
+            <button
+              type="button"
+              onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+              className="absolute inset-y-0 right-0 p-3"
+            >
+              <FontAwesomeIcon
+                icon={showCurrentPassword ? faEyeSlash : faEye}
+              />
+            </button>
+          </div>
           {errors.password && (
             <ErrorMessage>{errors.password.message}</ErrorMessage>
           )}
