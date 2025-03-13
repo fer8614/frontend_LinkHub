@@ -1,4 +1,5 @@
 import { BookmarkSquareIcon, UserIcon } from "@heroicons/react/20/solid";
+import { ChangeEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const tabs = [
@@ -15,7 +16,7 @@ export default function NavigationTabs() {
 
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     navigate(e.target.value);
   };
 
