@@ -1,21 +1,28 @@
 import { Link, Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
 import { useQuery } from "@tanstack/react-query";
+import { Navigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 import NavigationTabs from "../components/NavigationTabs";
 import { getUser } from "../api/LinkHubApi";
 
 export default function AppLayout() {
-  const { data, isLoading, error, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryFn: getUser,
     queryKey: ["user"],
     retry: 1,
     refetchOnWindowFocus: false,
   });
 
-  console.log(data);
-  console.log(isLoading);
-  console.log(isError);
-  console.log(error?.message);
+  if (isLoading)
+    return (
+      <div className="loading-container fixed inset-0 flex items-center justify-center">
+        <ClipLoader color="#36D7B7" loading={true} size={50} />
+      </div>
+    );
+  if (isError) {
+    return <Navigate to="/auth/login" />;
+  }
 
   return (
     <>
