@@ -20,3 +20,5 @@ export type RegisterFormProps = Pick<User, "handle" | "name" | "email"> & {
 export type LoginFormProps = Pick<User, "email"> & {
   password: string;
 };
+
+export type ProfileFormProps = Pick<User, "handle" | "description">;
