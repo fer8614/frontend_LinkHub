@@ -10,6 +10,7 @@ export type User = {
   email: string;
   _id: string;
   description: string;
+  image: string;
 };
 
 export type RegisterFormProps = Pick<User, "handle" | "name" | "email"> & {
