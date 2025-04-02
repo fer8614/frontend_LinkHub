@@ -1,12 +1,17 @@
 import { Switch } from "@headlessui/react";
+import { ChangeEvent } from "react";
 import { LinkHubLink } from "../types";
 import { classNames } from "../utils";
 
 type LinkHubInputProps = {
   item: LinkHubLink;
+  handleUrlChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function LinkHubInput({ item }: LinkHubInputProps) {
+export default function LinkHubInput({
+  item,
+  handleUrlChange,
+}: LinkHubInputProps) {
   return (
     <div className="bg-white shadow-sm p-5 flex items-center gap-3">
       <div
@@ -16,6 +21,9 @@ export default function LinkHubInput({ item }: LinkHubInputProps) {
       <input
         type="text"
         className="flex-1 border border-gray-300 rounded-lg p-2"
+        value={item.url}
+        onChange={handleUrlChange}
+        name={item.name}
       />
 
       <Switch
