@@ -3,15 +3,30 @@ import { social } from "../data/social";
 import LinkHubInput from "../components/LinkHubInput";
 import { isValidUrl } from "../utils";
 import { toast } from "sonner";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateProfile } from "../api/LinkHubApi";
+import { User } from "../types";
 
 export default function LinkHubView() {
   const [linkHubLinks, setLinkHubLinks] = useState(social);
+
+  const queryClient = useQueryClient();
+  const user: User = queryClient.getQueryData(["user"])!;
+
+  const { mutate } = useMutation({
+    mutationFn: updateProfile,
+    onSuccess: () => {
+      toast.success("Updated successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
 
   const handleUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
     const updatedLinks = linkHubLinks.map((link) =>
       link.name === e.target.name ? { ...link, url: e.target.value } : link,
     );
-    console.log(updatedLinks);
     setLinkHubLinks(updatedLinks);
   };
 
@@ -26,8 +41,12 @@ export default function LinkHubView() {
       }
       return link;
     });
-    console.log(updatedLinks);
     setLinkHubLinks(updatedLinks);
+
+    queryClient.setQueryData(["user"], (prevData: User) => ({
+      ...prevData,
+      links: JSON.stringify(updatedLinks),
+    }));
   };
   return (
     <>
@@ -40,6 +59,12 @@ export default function LinkHubView() {
             handleEnableLink={handleEnableLink}
           />
         ))}
+        <button
+          className="bg-cyan-400 p-2 text-lg w-full uppercase text-slate-600 rounded-lg font-bold"
+          onClick={() => mutate(user)}
+        >
+          Save Changes
+        </button>
       </div>
     </>
   );
