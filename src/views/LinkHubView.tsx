@@ -5,7 +5,7 @@ import { isValidUrl } from "../utils";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProfile } from "../api/LinkHubApi";
-import { User } from "../types";
+import { SocialNetwork, User } from "../types";
 
 export default function LinkHubView() {
   const [linkHubLinks, setLinkHubLinks] = useState(social);
@@ -26,7 +26,7 @@ export default function LinkHubView() {
   useEffect(() => {
     const updatedData = linkHubLinks.map((item) => {
       const userLink = JSON.parse(user.links).find(
-        (link) => link.name === item.name,
+        (link: SocialNetwork) => link.name === item.name,
       );
       if (userLink) {
         return { ...item, url: userLink.url, enabled: userLink.enabled };
@@ -62,10 +62,12 @@ export default function LinkHubView() {
     });
     setLinkHubLinks(updatedLinks);
 
-    queryClient.setQueryData(["user"], (prevData: User) => ({
-      ...prevData,
-      links: JSON.stringify(updatedLinks),
-    }));
+    queryClient.setQueryData(["user"], (prevData: User) => {
+      return {
+        ...prevData,
+        links: JSON.stringify(updatedLinks),
+      };
+    });
   };
   return (
     <>

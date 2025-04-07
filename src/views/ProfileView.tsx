@@ -1,10 +1,5 @@
 import { useForm } from "react-hook-form";
-import {
-  useQueryClient,
-  useMutation,
-  QueryCache,
-  QueryClient,
-} from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ChangeEvent } from "react";
 import ErrorMessage from "../components/errorMessage";
@@ -40,6 +35,7 @@ export default function ProfileView() {
       toast.error(error.message);
     },
     onSuccess: (data) => {
+      console.log(data);
       queryClient.setQueryData(["user"], (prevData: User) => {
         return {
           ...prevData,
