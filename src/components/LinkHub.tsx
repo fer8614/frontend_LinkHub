@@ -69,11 +69,11 @@ export default function LinkHub({ data }: LinkHubProps) {
               <p className="text-center text-lg font-black text-white">
                 {data.description}
               </p>
-              <p className="mt-20 flex flex-col gap-5">
+              <div className="mt-20 flex flex-col gap-5">
                 {enabledLinks.map((link) => (
                   <LinkHubLink key={link.name} link={link} />
                 ))}
-              </p>
+              </div>
             </div>
           </div>
         </main>

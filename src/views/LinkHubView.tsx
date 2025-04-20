@@ -43,10 +43,6 @@ export default function LinkHubView() {
     );
     setLinkHubLinks(updatedLinks);
 
-    queryClient.setQueryData(["user"], (prevData: User) => ({
-      ...prevData,
-      links: JSON.stringify(updatedLinks),
-    }));
   };
 
   const handleEnableLink = (socialNetwork: string) => {
@@ -62,6 +58,16 @@ export default function LinkHubView() {
     });
     setLinkHubLinks(updatedLinks);
 
+    const selectSocialNetwork = updatedLinks.find(
+      (link) => link.name === socialNetwork,
+    );
+    if (selectSocialNetwork?.enabled) {
+      console.log("Enabled", selectSocialNetwork);
+    } else {
+      console.log("Disabled", selectSocialNetwork);
+    }
+    
+    //Save to database
     queryClient.setQueryData(["user"], (prevData: User) => {
       return {
         ...prevData,
