@@ -42,8 +42,9 @@ export default function LinkHubView() {
       link.name === e.target.name ? { ...link, url: e.target.value } : link,
     );
     setLinkHubLinks(updatedLinks);
-
   };
+
+  const links: SocialNetwork[] = JSON.parse(user.links);
 
   const handleEnableLink = (socialNetwork: string) => {
     const updatedLinks = linkHubLinks.map((link) => {
@@ -58,20 +59,44 @@ export default function LinkHubView() {
     });
     setLinkHubLinks(updatedLinks);
 
+    let updatedItems: SocialNetwork[] = [];
     const selectSocialNetwork = updatedLinks.find(
       (link) => link.name === socialNetwork,
     );
     if (selectSocialNetwork?.enabled) {
-      console.log("Enabled", selectSocialNetwork);
+      const newItem = {
+        ...selectSocialNetwork,
+        id: links.length + 1,
+      }
+      updatedItems = [...links, newItem];
     } else {
-      console.log("Disabled", selectSocialNetwork);
+      const indexToUpdate = links.findIndex(link => link.name === socialNetwork);
+      updatedItems = links.map(link => {
+        if (link.name === socialNetwork) {
+          return { 
+            ...link, 
+            id: 0, 
+            enabled: false 
+          };
+        } else if(link.id > indexToUpdate) {
+          return { 
+            ...link, 
+            id: link.id - 1 
+          };
+        } else {
+          return link;
+        }
+      })
+      console.log(indexToUpdate);
     }
-    
+
+    console.log(updatedItems);
+
     //Save to database
     queryClient.setQueryData(["user"], (prevData: User) => {
       return {
         ...prevData,
-        links: JSON.stringify(updatedLinks),
+        links: JSON.stringify(updatedItems),
       };
     });
   };
