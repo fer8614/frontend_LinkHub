@@ -64,11 +64,27 @@ export default function LinkHubView() {
       (link) => link.name === socialNetwork,
     );
     if (selectSocialNetwork?.enabled) {
-      const newItem = {
-        ...selectSocialNetwork,
-        id: links.length + 1,
+      const id = links.filter(link => link.id).length + 1;
+      if (links.some(link => link.name === socialNetwork)) {
+        updatedItems = links.map(link => {
+          if (link.name === socialNetwork) {
+            return {
+              ...link,
+              enabled: true,
+              id
+            }
+          } else {
+            return link
+          }
+        });
+      }else {
+        const newItem = {
+          ...selectSocialNetwork,
+          id,
+        }
+        updatedItems = [...links, newItem];
       }
-      updatedItems = [...links, newItem];
+      
     } else {
       const indexToUpdate = links.findIndex(link => link.name === socialNetwork);
       updatedItems = links.map(link => {
@@ -87,10 +103,7 @@ export default function LinkHubView() {
           return link;
         }
       })
-      console.log(indexToUpdate);
     }
-
-    console.log(updatedItems);
 
     //Save to database
     queryClient.setQueryData(["user"], (prevData: User) => {
