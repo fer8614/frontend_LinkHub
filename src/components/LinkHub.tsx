@@ -6,6 +6,7 @@ import NavigationTabs from "../components/NavigationTabs";
 import { SocialNetwork, User } from "../types";
 import { useEffect, useState } from "react";
 import LinkHubLink from "./LinkHubLink";
+import { useQueryClient } from "@tanstack/react-query";
 
 type LinkHubProps = {
   data: User;
@@ -22,6 +23,8 @@ export default function LinkHub({ data }: LinkHubProps) {
     );
   }, [data]);
 
+  const queryClient = useQueryClient();
+  
   const handleDragEnd = (e: DragEndEvent) => {
     const { active, over } = e;
     if (over && over.id) {
@@ -29,6 +32,16 @@ export default function LinkHub({ data }: LinkHubProps) {
       const nextIndex = enabledLinks.findIndex((link) => link.id === over?.id);
       const updatedLinks = arrayMove(enabledLinks, prevIndex, nextIndex);
       setEnabledLinks(updatedLinks);
+
+      const disabledLinks: SocialNetwork[] = JSON.parse(data.links).filter((item: SocialNetwork) => !item.enabled);
+      const links = updatedLinks.concat(disabledLinks);
+      //Save to database
+      queryClient.setQueryData(["user"], (prevData: User) => {
+        return {
+          ...prevData,
+          links: JSON.stringify(links),
+        };
+      });
     }
   };
 
