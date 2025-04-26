@@ -1,5 +1,6 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { ClipLoader } from "react-spinners";
 import { getUserByHandle } from "../api/LinkHubApi";
 
 export default function HandleView() {
@@ -10,9 +11,17 @@ export default function HandleView() {
     queryKey: ["handle", handle],
     retry: 1,
   });
-  console.log(isLoading);
-  console.log(error);
-  console.log(data);
+
+  if (isLoading) 
+    return (
+      <div className="loading-container fixed inset-0 flex items-center justify-center">
+        <ClipLoader color="#36D7B7" loading={true} size={50} />
+      </div>
+    );
+  if (error) {
+    return <Navigate to="/404" />;
+  }
+
   return (
     <div>
       <h1>HandleView</h1>
