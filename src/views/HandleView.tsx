@@ -2,6 +2,7 @@ import { Navigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ClipLoader } from "react-spinners";
 import { getUserByHandle } from "../api/LinkHubApi";
+import HandleData from "../components/HandleData";
 
 export default function HandleView() {
   const params = useParams();
@@ -22,9 +23,5 @@ export default function HandleView() {
     return <Navigate to="/404" />;
   }
 
-  return (
-    <div>
-      <h1>HandleView</h1>
-    </div>
-  );
+  if (data) return <HandleData />;
 }
