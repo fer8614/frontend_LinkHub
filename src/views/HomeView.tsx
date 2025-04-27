@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import SearchForm from "../components/SearchForm";
 
 export default function HomeView() {
     return (
@@ -15,6 +16,8 @@ export default function HomeView() {
                         <p className="text-xl text-slate-800">
                         Join our developer community by sharing your social media accounts, including your GitHub, LinkedIn, Instagram, YouTube, Facebook, and more profiles.
                         </p>
+
+                        <SearchForm />
                     </div>
                 </div>
             </main>
