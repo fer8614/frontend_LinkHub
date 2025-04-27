@@ -23,5 +23,5 @@ export default function HandleView() {
     return <Navigate to="/404" />;
   }
 
-  if (data) return <HandleData />;
+  if (data) return <HandleData data={data} />;
 }

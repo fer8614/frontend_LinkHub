@@ -6,13 +6,10 @@ type HandleDataProps = {
 
 export default function HandleData({ data }: HandleDataProps) {
   return (
-    <div>
-      <h1>{data.name}</h1>
-      <p>{data.description}</p>
-      <img src={data.image} alt="" />
-      <div>
-        
-      </div>
+    <div className="space-y-6 text-white">
+      <p className="text-5xl text-center font-black">{data.handle}</p>
+      {data.image && <img src={data.image} alt="image" className="mx-auto max-w-[250px]" />}
+      <p className="text-lg text-center font-bold">{data.description}</p>
     </div>
   );
 }
