@@ -1,7 +1,11 @@
 
 import { useForm } from "react-hook-form";
 import slugify from "react-slugify";
+import { useMutation } from "@tanstack/react-query";
+import { ClipLoader } from "react-spinners";
 import ErrorMessage from "./errorMessage";
+import { searchUserByHandle } from "../api/LinkHubApi";
+import { Link } from "react-router-dom";
 
 export default function SearchForm() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm({
@@ -12,10 +16,15 @@ export default function SearchForm() {
 
     const handle = watch("handle");
 
+    const mutation = useMutation({
+      mutationFn: searchUserByHandle
+    });
+
     const handleSearch = () => {
       const slug = slugify(handle);
-      console.log(slug);
+      mutation.mutate(slug);
     };
+
     return (
         <form
         onSubmit={handleSubmit(handleSearch)}
@@ -40,7 +49,11 @@ export default function SearchForm() {
         )}
       
         <div className="mt-10">
-      
+          {mutation.isPending && <div className="loading-container fixed inset-0 flex items-center justify-center">
+            <ClipLoader color="#36D7B7" loading={true} size={50} />
+          </div>}
+          {mutation.error && <p className="text-center text-red-600 font-black">{mutation.error.message}</p>}
+          {mutation.data && <p className="text-center text-cyan-500 font-black">{mutation.data} go to <Link to={"/auth/register"} className="text-cyan-600 hover:underline">Register</Link></p>}
         </div>
       
         <input
