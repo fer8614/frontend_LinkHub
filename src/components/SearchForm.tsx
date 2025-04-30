@@ -53,7 +53,7 @@ export default function SearchForm() {
             <ClipLoader color="#36D7B7" loading={true} size={50} />
           </div>}
           {mutation.error && <p className="text-center text-red-600 font-black">{mutation.error.message}</p>}
-          {mutation.data && <p className="text-center text-cyan-500 font-black">{mutation.data} go to <Link to={"/auth/register"} className="text-cyan-600 hover:underline">Register</Link></p>}
+          {mutation.data && <p className="text-center text-cyan-500 font-black">{mutation.data} go to <Link to={"/auth/register"} className="text-cyan-600 hover:underline" state={{ handle: slugify(handle) }}>Register</Link></p>}
         </div>
       
         <input
