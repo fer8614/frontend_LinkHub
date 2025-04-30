@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,7 @@ import ErrorMessage from "../components/errorMessage";
 import api from "../config/axios";
 
 export default function RegisterView() {
-
+  const navigate = useNavigate();
   const location = useLocation();
   const handle = location.state?.handle;
   const initialValues = {
@@ -36,6 +36,7 @@ export default function RegisterView() {
       const { data } = await api.post(`/auth/register`, formData);
       toast.success(data);
       reset();
+      navigate("/auth/login");
     } catch (error) {
       if (isAxiosError(error) && error.response) {
         toast.error(error.response.data.error);
