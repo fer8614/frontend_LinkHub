@@ -1,54 +1,111 @@
-# React + TypeScript + Vite
+# LinkHub - Modern Link Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![LinkHub Logo](public/logo.png) <!-- Make sure to have a logo in the public folder -->
 
-Currently, two official plugins are available:
+LinkHub is a modern web application for managing and organizing important links. Built with React, TypeScript and TailwindCSS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Key Features
 
-## Expanding the ESLint configuration
+- **Link management** with drag and drop (using @dnd-kit)
+- **User authentication**
+- **Advanced link search**
+- **Responsive and accessible** interface
+- **Notifications** with sonner
+- **Forms** with react-hook-form
+- **State management** with React Query
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠 Technologies Used
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Frontend**: React 19 + TypeScript
+- **Styling**: TailwindCSS
+- **Icons**: Heroicons and Font Awesome
+- **Routing**: React Router DOM
+- **Drag & Drop**: @dnd-kit
+- **Forms**: react-hook-form
+- **State management**: @tanstack/react-query
+- **Notifications**: sonner
+- **Build Tool**: Vite
+
+## 📦 Main Dependencies
+
+```json
+"dependencies": {
+  "@dnd-kit/core": "^6.3.1",
+  "@dnd-kit/sortable": "^10.0.0",
+  "@fortawesome/fontawesome-svg-core": "^6.7.2",
+  "@headlessui/react": "^2.2.0",
+  "@heroicons/react": "^2.2.0",
+  "@tanstack/react-query": "^5.68.0",
+  "axios": "^1.8.2",
+  "react": "^19.0.0",
+  "react-dom": "^19.0.0",
+  "react-router-dom": "^7.3.0",
+  "sonner": "^2.0.1"
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+1. **Clone the repository**
+```bash
+git clone https://github.com/your-username/linkhub.git
+cd linkhub/frontend_LinkHub
 ```
+
+2. **Install dependencies**
+```bash
+npm install
+```
+
+3. **Set up environment variables**
+Create a `.env.local` file based on `.env.example`
+
+4. **Run in development mode**
+```bash
+npm run dev
+```
+
+5. **Build for production**
+```bash
+npm run build
+```
+
+## 📂 Project Structure
+
+```
+frontend_LinkHub/
+├── public/            # Static files
+├── src/
+│   ├── components/    # Reusable components
+│   ├── views/         # Main views
+│   ├── hooks/         # Custom hooks
+│   ├── utils/         # Utility functions
+│   ├── types/         # TypeScript types
+│   ├── api/           # API configuration
+│   └── App.tsx        # Root component
+├── .env.local         # Environment variables
+├── package.json       # Dependencies and scripts
+└── vite.config.ts     # Vite configuration
+```
+
+## 🤝 Contributing
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'Add some feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+MIT [Your Name] 2025
+
+## 🔗 Related Links
+
+- [LinkHub Backend](https://github.com/your-username/linkhub-backend)
+- [API Documentation](https://api.linkhub.docs)
+- [Progress Board](https://github.com/your-username/linkhub/projects/1)
+
+---
+
+💻 Developed by Yesid Fernando Cepeda B.
