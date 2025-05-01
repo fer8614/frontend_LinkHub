@@ -32,7 +32,7 @@ export default function SearchForm() {
         <div className="relative flex items-center  bg-white  px-2">
           <label
             htmlFor="handle"
-          >linkhub.com/</label>
+          >linkhubf.netlify.app/</label>
           <input
             type="text"
             id="handle"
