@@ -48,8 +48,8 @@ LinkHub is a modern web application for managing and organizing important links.
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/your-username/linkhub.git
-cd linkhub/frontend_LinkHub
+git clone https://github.com/fer8614/frontend_LinkHub.git
+cd frontend_LinkHub
 ```
 
 2. **Install dependencies**
@@ -98,13 +98,11 @@ frontend_LinkHub/
 
 ## 📄 License
 
-MIT [Your Name] 2025
+MIT © Yesid Fernando Cepeda B. 2025
 
 ## 🔗 Related Links
 
-- [LinkHub Backend](https://github.com/your-username/linkhub-backend)
-- [API Documentation](https://api.linkhub.docs)
-- [Progress Board](https://github.com/your-username/linkhub/projects/1)
+- [LinkHub Backend](https://github.com/fer8614/frontend_LinkHub)
 
 ---
 
