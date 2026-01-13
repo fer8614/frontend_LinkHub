@@ -12,10 +12,10 @@ export default function AdminNavigation() {
 
   return (
     <button
-      className=" bg-lime-500 p-2 text-slate-800 uppercase font-black text-xs rounded-lg cursor-pointer"
+      className="gradient-button px-6 py-2 text-sm uppercase font-bold rounded-lg cursor-pointer hover:shadow-lg hover:shadow-purple-500/50"
       onClick={logOut}
     >
-              Log Out
-        </button>
+      Log Out
+    </button>
     );
 }

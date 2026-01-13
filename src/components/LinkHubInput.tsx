@@ -15,14 +15,15 @@ export default function LinkHubInput({
   handleEnableLink,
 }: LinkHubInputProps) {
   return (
-    <div className="bg-white shadow-sm p-5 flex items-center gap-3">
+    <div className="card-modern-dark p-5 flex items-center gap-4 group hover:border-white/30">
       <div
-        className="w-12 h-12 bg-cover"
+        className="social-link-icon flex-shrink-0"
         style={{ backgroundImage: `url('/social/icon_${item.name}.svg')` }}
       ></div>
       <input
         type="text"
-        className="flex-1 border border-gray-300 rounded-lg p-2"
+        className="input-modern flex-1"
+        placeholder={`Enter your ${item.name} URL`}
         value={item.url}
         onChange={handleUrlChange}
         name={item.name}
@@ -32,15 +33,15 @@ export default function LinkHubInput({
         checked={item.enabled}
         onChange={() => handleEnableLink(item.name)}
         className={classNames(
-          item.enabled ? "bg-blue-500" : "bg-gray-200",
-          "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+          item.enabled ? "bg-gradient-to-r from-purple-500 to-pink-500" : "bg-white/10",
+          "relative inline-flex h-7 w-14 flex-shrink-0 cursor-pointer rounded-full border border-white/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900",
         )}
       >
         <span
           aria-hidden="true"
           className={classNames(
-            item.enabled ? "translate-x-5" : "translate-x-0",
-            "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out",
+            item.enabled ? "translate-x-7" : "translate-x-1",
+            "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-300 ease-in-out",
           )}
         />
       </Switch>

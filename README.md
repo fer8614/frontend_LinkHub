@@ -106,4 +106,4 @@ MIT © Yesid Fernando Cepeda B. 2025
 
 ---
 
-💻 Developed by Yesid Fernando Cepeda B.
+💻 Developed by Yesid Fernando Cepeda B.MIT [Your Name] 2025

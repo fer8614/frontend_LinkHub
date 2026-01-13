@@ -115,7 +115,7 @@ export default function LinkHubView() {
   };
   return (
     <>
-      <div className="space-y-5">
+      <div className="space-y-4">
         {linkHubLinks.map((item) => (
           <LinkHubInput
             key={item.name}
@@ -125,7 +125,7 @@ export default function LinkHubView() {
           />
         ))}
         <button
-          className="bg-cyan-400 p-2 text-lg w-full uppercase text-slate-600 rounded-lg font-bold"
+          className="gradient-button w-full py-3 text-lg uppercase tracking-wider font-bold mt-8"
           onClick={() => mutate(queryClient.getQueryData(["user"])!)}
         >
           Save Changes

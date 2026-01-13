@@ -65,18 +65,18 @@ export default function ProfileView() {
 
   return (
     <form
-      className="bg-white p-10 rounded-lg space-y-5"
+      className="card-modern-dark space-y-6"
       onSubmit={handleSubmit(handleUserProfileForm)}
     >
-      <legend className="text-2xl text-slate-800 text-center">
-        Edit Information
+      <legend className="text-3xl font-black gradient-text text-center mb-8">
+        Edit Your Profile
       </legend>
       <div className="grid grid-cols-1 gap-2">
-        <label htmlFor="handle">Handle:</label>
+        <label htmlFor="handle" className="form-label">Handle / Username</label>
         <input
           type="text"
-          className="border-none bg-slate-100 rounded-lg p-2"
-          placeholder="handle or Username"
+          className="input-modern"
+          placeholder="your_username"
           {...register("handle", {
             required: "Handle or Username is required",
           })}
@@ -85,10 +85,10 @@ export default function ProfileView() {
       </div>
 
       <div className="grid grid-cols-1 gap-2">
-        <label htmlFor="description">Description:</label>
+        <label htmlFor="description" className="form-label">Bio / Description</label>
         <textarea
-          className="border-none bg-slate-100 rounded-lg p-2"
-          placeholder="Your Description"
+          className="input-modern resize-none h-24"
+          placeholder="Tell people about yourself..."
           {...register("description", {
             required: "Description is required",
           })}
@@ -99,20 +99,22 @@ export default function ProfileView() {
       </div>
 
       <div className="grid grid-cols-1 gap-2">
-        <label htmlFor="handle">Image:</label>
-        <input
-          id="image"
-          type="file"
-          name="handle"
-          className="border-none bg-slate-100 rounded-lg p-2"
-          accept="image/*"
-          onChange={handleChange}
-        />
+        <label htmlFor="image" className="form-label">Profile Picture</label>
+        <div className="relative">
+          <input
+            id="image"
+            type="file"
+            name="image"
+            className="input-modern cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-purple-500 file:to-pink-500 file:text-white hover:file:from-purple-600 hover:file:to-pink-600"
+            accept="image/*"
+            onChange={handleChange}
+          />
+        </div>
       </div>
 
       <input
         type="submit"
-        className="bg-cyan-400 p-2 text-lg w-full uppercase text-slate-600 rounded-lg font-bold cursor-pointer"
+        className="gradient-button w-full py-3 text-lg uppercase tracking-wider mt-8"
         value="Save Changes"
       />
     </form>

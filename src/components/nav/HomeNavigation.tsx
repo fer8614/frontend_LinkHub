@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 
 export default function HomeNavigation() {
     return (
-        <>
-            <Link to="/auth/login" className="text-white p-2 uppercase font-black text-xs cursor-pointer">
-                Login
+        <div className="flex gap-3">
+            <Link to="/auth/login" className="nav-link px-4 py-2 text-sm uppercase font-bold">
+                Sign In
             </Link>
-            <Link to="/auth/register" className="bg-lime-500 p-2 text-slate-800 uppercase font-black text-xs rounded-lg cursor-pointer">
-                Register
+            <Link to="/auth/register" className="gradient-button px-6 py-2 text-sm uppercase font-bold rounded-lg">
+                Get Started
             </Link>
-        </>
+        </div>
     );
 }

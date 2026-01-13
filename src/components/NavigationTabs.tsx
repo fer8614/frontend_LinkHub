@@ -21,7 +21,7 @@ export default function NavigationTabs() {
   };
 
   return (
-    <div className="mb-5">
+    <div className="mb-8">
       <div className="sm:hidden">
         <label htmlFor="tabs" className="sr-only">
           Select a tab
@@ -29,7 +29,7 @@ export default function NavigationTabs() {
         <select
           id="tabs"
           name="tabs"
-          className="block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+          className="input-modern w-full"
           onChange={handleChange}
         >
           {tabs.map((tab) => (
@@ -41,33 +41,31 @@ export default function NavigationTabs() {
       </div>
 
       <div className="hidden sm:block">
-        <div className="border-b border-gray-200">
-          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
-            {tabs.map((tab) => (
-              <Link
-                key={tab.name}
-                to={tab.href}
+        <nav className="flex space-x-2" aria-label="Tabs">
+          {tabs.map((tab) => (
+            <Link
+              key={tab.name}
+              to={tab.href}
+              className={classNames(
+                location.pathname === tab.href
+                  ? "gradient-text border-b-2 border-gradient-to-r from-purple-500 to-pink-500"
+                  : "nav-link",
+                "group inline-flex items-center py-3 px-4 text-lg font-semibold transition-all duration-300",
+              )}
+            >
+              <tab.icon
                 className={classNames(
                   location.pathname === tab.href
-                    ? "border-blue-500 text-blue-500"
-                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
-                  "group inline-flex items-center border-b-2 py-4 px-1 text-xl",
+                    ? "text-purple-400"
+                    : "text-white/50 group-hover:text-white/70",
+                  "-ml-0.5 mr-2 h-5 w-5 transition-colors",
                 )}
-              >
-                <tab.icon
-                  className={classNames(
-                    location.pathname === tab.href
-                      ? "text-blue-500"
-                      : "text-gray-400 group-hover:text-gray-500",
-                    "-ml-0.5 mr-2 h-5 w-5",
-                  )}
-                  aria-hidden="true"
-                />
-                <span>{tab.name}</span>
-              </Link>
-            ))}
-          </nav>
-        </div>
+                aria-hidden="true"
+              />
+              <span>{tab.name}</span>
+            </Link>
+          ))}
+        </nav>
       </div>
     </div>
   );

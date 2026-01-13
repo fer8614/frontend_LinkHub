@@ -40,22 +40,23 @@ export default function LoginView() {
 
   return (
     <>
-      <h1 className="text-4xl text-white font-bold">Login</h1>
+      <h1 className="text-5xl font-black gradient-text mb-2">Welcome Back</h1>
+      <p className="text-white/60 text-lg mb-10">Sign in to your LinkHub account</p>
 
       <form
         onSubmit={handleSubmit(handleLogin)}
-        className="bg-white px-5 py-20 rounded-lg space-y-10 mt-10"
+        className="card-modern space-y-6 mt-8"
         noValidate
       >
-        <div className="grid grid-cols-1 space-y-3">
-          <label htmlFor="email" className="text-2xl text-slate-500">
-            E-mail
+        <div className="grid grid-cols-1 space-y-2">
+          <label htmlFor="email" className="form-label">
+            Email Address
           </label>
           <input
             id="email"
             type="email"
-            placeholder="Email de Registro"
-            className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+            placeholder="your@email.com"
+            className="input-modern"
             {...register("email", {
               required: "El Email es obligatorio",
               pattern: {
@@ -66,16 +67,16 @@ export default function LoginView() {
           />
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </div>
-        <div className="grid grid-cols-1 space-y-3">
-          <label htmlFor="password" className="text-2xl text-slate-500">
+        <div className="grid grid-cols-1 space-y-2">
+          <label htmlFor="password" className="form-label">
             Password
           </label>
           <div className="relative">
             <input
               id="password"
               type={showCurrentPassword ? "text" : "password"}
-              placeholder="Password de Registro"
-              className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400 w-full"
+              placeholder="••••••••"
+              className="input-modern"
               {...register("password", {
                 required: "El Password es obligatorio",
               })}
@@ -83,7 +84,7 @@ export default function LoginView() {
             <button
               type="button"
               onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-              className="absolute inset-y-0 right-0 p-3"
+              className="absolute inset-y-0 right-0 pr-4 text-white/50 hover:text-white transition-colors"
             >
               <FontAwesomeIcon
                 icon={showCurrentPassword ? faEyeSlash : faEye}
@@ -97,17 +98,18 @@ export default function LoginView() {
 
         <input
           type="submit"
-          className="bg-cyan-400 p-3 text-lg w-full uppercase text-slate-600 rounded-lg font-bold cursor-pointer"
-          value="Iniciar Sesión"
+          className="gradient-button w-full py-3 text-lg uppercase tracking-wider"
+          value="Sign In"
         />
       </form>
 
-      <nav className="mt-10">
+      <nav className="mt-8 text-center">
+        <p className="text-white/60 mb-3">Don't have an account?</p>
         <Link
-          className="text-center text-white text-lg block"
+          className="gradient-text font-bold text-lg hover:opacity-80 transition-opacity"
           to="/auth/register"
         >
-          Don't have an account? Create one here
+          Create one here
         </Link>
       </nav>
     </>

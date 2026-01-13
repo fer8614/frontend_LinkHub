@@ -3,21 +3,36 @@ import SearchForm from "../components/SearchForm";
 
 export default function HomeView() {
     return (
-        <div>
+        <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-900 to-slate-950">
             <Header />
 
-            <main className="bg-gray-100 min-h-screen py-10 lg:bg-[url('/bg.svg')] bg-no-repeat bg-right-top lg:bg-[size:50%]">
-                <div className="mx-auto max-w-5xl mt-10">
-                    <div className="lg:w-1/2 px-10 lg:px-0 space-y-6">
-                        <h1 className="text-6xl font-black">
-                            All your <span className="text-cyan-400">Social Networks</span> in one link
-                        </h1>
+            <main className="min-h-screen py-4 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-30">
+                    <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+                    <div className="absolute top-40 right-10 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+                    <div className="absolute -bottom-8 left-20 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+                </div>
 
-                        <p className="text-xl text-slate-800">
-                        Join our developer community by sharing your social media accounts, including your GitHub, LinkedIn, Instagram, YouTube, Facebook, and more profiles.
-                        </p>
+                <div className="mx-auto max-w-6xl mt-2 px-4 relative z-10">
+                    <div className="flex flex-col lg:flex-row gap-12 items-start">
+                        <div className="lg:w-1/2 space-y-8">
+                            <div className="space-y-4">
+                                <h1 className="text-7xl md:text-8xl font-black gradient-text leading-tight">
+                                    All your Social Networks
+                                </h1>
+                                <p className="text-2xl font-bold text-white">
+                                    in one link
+                                </p>
+                            </div>
 
-                        <SearchForm />
+                            <p className="text-xl text-white/80 leading-relaxed max-w-xl">
+                                Join our developer community by sharing your social media accounts, including your GitHub, LinkedIn, Instagram, YouTube, Facebook, and more profiles.
+                            </p>
+                        </div>
+
+                        <div className="lg:w-1/2 flex items-center justify-center mt-40">
+                            <SearchForm />
+                        </div>
                     </div>
                 </div>
             </main>

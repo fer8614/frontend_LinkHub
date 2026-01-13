@@ -49,54 +49,61 @@ export default function LinkHub({ data }: LinkHubProps) {
   return (
     <>
       <Header />
-      <div className="bg-gray-100  min-h-screen py-10">
-        <main className="mx-auto max-w-5xl p-10 md:p-0">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-900 to-slate-950 py-10">
+        <main className="mx-auto max-w-6xl px-4 md:px-0">
           <NavigationTabs />
 
-          <div className="flex justify-end">
+          <div className="flex justify-end mb-8">
             <Link
-              className="font-bold text-right text-slate-800 text-2xl"
+              className="gradient-text font-bold text-lg hover:opacity-80 transition-opacity flex items-center gap-2"
               to={`/${data.handle}`}
               target="_blank"
               rel="noreferrer noopener"
             >
-              Visit My Profile: /{data.handle}
+              <span>Visit My Profile</span>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
             </Link>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-10 mt-10">
-            <div className="flex-1 ">
+          <div className="flex flex-col lg:flex-row gap-8">
+            <div className="flex-1">
               <Outlet />
             </div>
-            <div className="w-full md:w-96 bg-slate-800 px-5 py-10 space-y-6">
-              <p className="text-4xl text-center text-white">{data.handle}</p>
+            <div className="w-full lg:w-96 profile-card sticky top-24">
+              <div className="text-center space-y-6">
+                <p className="text-4xl font-black gradient-text">{data.handle}</p>
 
-              {data.image && (
-                <img
-                  src={data.image}
-                  alt="Profile Picture"
-                  className="mx-auto max-w-[250px]"
-                />
-              )}
-              <p className="text-center text-lg font-black text-white">
-                {data.description}
-              </p>
+                {data.image && (
+                  <div className="flex justify-center">
+                    <img
+                      src={data.image}
+                      alt="Profile Picture"
+                      className="w-48 h-48 rounded-2xl object-cover border-2 border-white/20 hover:border-white/40 transition-colors"
+                    />
+                  </div>
+                )}
+                <p className="text-center text-lg font-semibold text-white/90 leading-relaxed">
+                  {data.description}
+                </p>
 
-              <DndContext
-                collisionDetection={closestCenter}
-                onDragEnd={handleDragEnd}
-              >
-                <div className="mt-20 flex flex-col gap-5">
-                  <SortableContext
-                    items={enabledLinks}
-                    strategy={verticalListSortingStrategy}
-                  >
-                    {enabledLinks.map((link) => (
-                      <LinkHubLink key={link.name} link={link} />
-                    ))}
-                  </SortableContext>
-                </div>
-              </DndContext>
+                <DndContext
+                  collisionDetection={closestCenter}
+                  onDragEnd={handleDragEnd}
+                >
+                  <div className="mt-8 flex flex-col gap-4">
+                    <SortableContext
+                      items={enabledLinks}
+                      strategy={verticalListSortingStrategy}
+                    >
+                      {enabledLinks.map((link) => (
+                        <LinkHubLink key={link.name} link={link} />
+                      ))}
+                    </SortableContext>
+                  </div>
+                </DndContext>
+              </div>
             </div>
           </div>
         </main>

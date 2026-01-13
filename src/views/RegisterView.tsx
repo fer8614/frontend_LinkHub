@@ -49,34 +49,35 @@ export default function RegisterView() {
 
   return (
     <>
-      <h1 className="text-4xl text-white font-bold">Create Account</h1>
+      <h1 className="text-5xl font-black gradient-text mb-2">Join LinkHub</h1>
+      <p className="text-white/60 text-lg mb-10">Create your account and start sharing</p>
 
       <form
         onSubmit={handleSubmit(handleRegister)}
-        className="bg-white px-5 py-20 rounded-lg space-y-10 mt-10"
+        className="card-modern space-y-5 mt-8"
       >
-        <div className="grid grid-cols-1 space-y-3">
-          <label htmlFor="name" className="text-2xl text-slate-500">
-            Name
+        <div className="grid grid-cols-1 space-y-2">
+          <label htmlFor="name" className="form-label">
+            Full Name
           </label>
           <input
             id="name"
             type="text"
-            placeholder="Your name"
-            className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+            placeholder="John Doe"
+            className="input-modern"
             {...register("name", { required: "Name is required" })}
           />
           {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
         </div>
-        <div className="grid grid-cols-1 space-y-3">
-          <label htmlFor="email" className="text-2xl text-slate-500">
-            Email
+        <div className="grid grid-cols-1 space-y-2">
+          <label htmlFor="email" className="form-label">
+            Email Address
           </label>
           <input
             id="email"
             type="email"
-            placeholder="Registration Email"
-            className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+            placeholder="your@email.com"
+            className="input-modern"
             {...register("email", {
               required: "Email is required",
               pattern: {
@@ -87,31 +88,31 @@ export default function RegisterView() {
           />
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </div>
-        <div className="grid grid-cols-1 space-y-3">
-          <label htmlFor="handle" className="text-2xl text-slate-500">
-            Handle
+        <div className="grid grid-cols-1 space-y-2">
+          <label htmlFor="handle" className="form-label">
+            Username
           </label>
           <input
             id="handle"
             type="text"
-            placeholder="Username: no spaces"
-            className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+            placeholder="johndoe (no spaces)"
+            className="input-modern"
             {...register("handle", { required: "Handle is required" })}
           />
           {errors.handle && (
             <ErrorMessage>{errors.handle.message}</ErrorMessage>
           )}
         </div>
-        <div className="grid grid-cols-1 space-y-3">
-          <label htmlFor="password" className="text-2xl text-slate-500">
+        <div className="grid grid-cols-1 space-y-2">
+          <label htmlFor="password" className="form-label">
             Password
           </label>
           <div className="relative">
             <input
               id="password"
               type={showNewPassword ? "text" : "password"}
-              placeholder="Registration Password"
-              className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400 w-full"
+              placeholder="••••••••"
+              className="input-modern"
               {...register("password", {
                 required: "Password is required",
                 minLength: {
@@ -123,7 +124,7 @@ export default function RegisterView() {
             <button
               type="button"
               onClick={() => setShowNewPassword(!showNewPassword)}
-              className="absolute inset-y-0 right-0 p-3"
+              className="absolute inset-y-0 right-0 pr-4 text-white/50 hover:text-white transition-colors"
             >
               <FontAwesomeIcon icon={showNewPassword ? faEyeSlash : faEye} />
             </button>
@@ -133,19 +134,19 @@ export default function RegisterView() {
           )}
         </div>
 
-        <div className="grid grid-cols-1 space-y-3">
+        <div className="grid grid-cols-1 space-y-2">
           <label
             htmlFor="password_confirmation"
-            className="text-2xl text-slate-500"
+            className="form-label"
           >
-            Repeat Password
+            Confirm Password
           </label>
           <div className="relative">
             <input
               id="password_confirmation"
               type={showConfirmPassword ? "text" : "password"}
-              placeholder="Repeat Password"
-              className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400 w-full"
+              placeholder="••••••••"
+              className="input-modern"
               {...register("password_confirmation", {
                 required: "Password confirmation is required",
                 validate: (value) =>
@@ -155,7 +156,7 @@ export default function RegisterView() {
             <button
               type="button"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute inset-y-0 right-0 p-3"
+              className="absolute inset-y-0 right-0 pr-4 text-white/50 hover:text-white transition-colors"
             >
               <FontAwesomeIcon
                 icon={showConfirmPassword ? faEyeSlash : faEye}
@@ -169,14 +170,15 @@ export default function RegisterView() {
 
         <input
           type="submit"
-          className="bg-cyan-400 p-3 text-lg w-full uppercase text-slate-600 rounded-lg font-bold cursor-pointer"
+          className="gradient-button w-full py-3 text-lg uppercase tracking-wider mt-6"
           value="Create Account"
         />
       </form>
 
-      <nav className="mt-10">
-        <Link className="text-center text-white text-lg block" to="/auth/login">
-          Already have an account? Sign in
+      <nav className="mt-8 text-center">
+        <p className="text-white/60 mb-3">Already have an account?</p>
+        <Link className="gradient-text font-bold text-lg hover:opacity-80 transition-opacity" to="/auth/login">
+          Sign in here
         </Link>
       </nav>
     </>

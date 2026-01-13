@@ -29,36 +29,43 @@ export default function SearchForm() {
         <form
         onSubmit={handleSubmit(handleSearch)}
         className="space-y-5">
-        <div className="relative flex items-center  bg-white  px-2">
+        <div className="relative flex items-center card-modern px-0 overflow-hidden">
           <label
             htmlFor="handle"
-          >linkhubf.netlify.app/</label>
+            className="px-4 py-3 text-white/70 font-semibold whitespace-nowrap text-sm"
+          >linkhub.app/</label>
           <input
             type="text"
             id="handle"
-            className="border-none bg-transparent p-2 focus:ring-0 flex-1"
+            className="border-none bg-transparent px-2 py-3 focus:ring-0 flex-1 text-white placeholder-white/50 focus:outline-none"
             placeholder="elonmusk, zuck, jeffbezos"
             {...register("handle", {
               required: "Username is required",
             })}
           />
-      
         </div>
         {errors.handle && (
           <ErrorMessage>{errors.handle.message}</ErrorMessage>
         )}
       
-        <div className="mt-10">
+        <div className="mt-8 space-y-4">
           {mutation.isPending && <div className="loading-container fixed inset-0 flex items-center justify-center">
-            <ClipLoader color="#36D7B7" loading={true} size={50} />
+            <ClipLoader color="#a855f7" loading={true} size={50} />
           </div>}
-          {mutation.error && <p className="text-center text-red-600 font-black">{mutation.error.message}</p>}
-          {mutation.data && <p className="text-center text-cyan-500 font-black">{mutation.data} go to <Link to={"/auth/register"} className="text-cyan-600 hover:underline" state={{ handle: slugify(handle) }}>Register</Link></p>}
+          {mutation.error && <p className="text-center text-red-400 font-bold bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3">{mutation.error.message}</p>}
+          {mutation.data && (
+            <div className="text-center space-y-3">
+              <p className="gradient-text font-bold text-lg">{mutation.data}</p>
+              <Link to={"/auth/register"} className="gradient-button inline-block px-6 py-2 rounded-lg" state={{ handle: slugify(handle) }}>
+                Create Account
+              </Link>
+            </div>
+          )}
         </div>
       
         <input
           type="submit"
-          className="bg-cyan-400 p-3 text-lg w-full uppercase text-slate-600 rounded-lg font-bold cursor-pointer"
+          className="gradient-button w-full py-3 text-lg uppercase tracking-wider font-bold"
           value='Get my LinkHub'
         />
       </form>
