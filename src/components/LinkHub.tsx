@@ -76,7 +76,7 @@ export default function LinkHub({ data }: LinkHubProps) {
                 <p className="text-xs font-medium uppercase tracking-widest text-white/30 mb-4 text-center">Live Preview</p>
                 <div className="phone-mockup p-6 pt-8">
                   <div className="text-center space-y-5">
-                    <p className="text-2xl font-extrabold gradient-text">{data.handle}</p>
+                    <p className="text-2xl font-extrabold gradient-text">{data.name}</p>
 
                     {data.image && (
                       <div className="flex justify-center">

@@ -17,7 +17,7 @@ export default function HandleData({ data }: HandleDataProps) {
           </div>
         )}
         <div className="space-y-2">
-          <p className="text-3xl font-extrabold gradient-text">{data.handle}</p>
+          <p className="text-3xl font-extrabold gradient-text">{data.name}</p>
           {data.description && (
             <p className="text-sm text-white/50 leading-relaxed max-w-sm mx-auto">{data.description}</p>
           )}
