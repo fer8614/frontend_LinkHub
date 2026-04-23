@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ChangeEvent } from "react";
-import { AtSign, FileText, ImagePlus, Save } from "lucide-react";
+import { AtSign, FileText, ImagePlus, Save, User as UserIcon } from "lucide-react";
 import ErrorMessage from "../components/errorMessage";
 import { ProfileFormProps, User } from "../types";
 import { updateProfile, uploadImage } from "../api/LinkHubApi";
@@ -16,7 +16,7 @@ export default function ProfileView() {
     handleSubmit,
     formState: { errors },
   } = useForm<ProfileFormProps>({
-    defaultValues: { handle: data.handle, description: data.description },
+    defaultValues: { handle: data.handle, name: data.name, description: data.description },
   });
 
   const updateProfileMutation = useMutation({
@@ -60,6 +60,7 @@ export default function ProfileView() {
     const user: User = queryClient.getQueryData(["user"])!;
     user.description = formData.description;
     user.handle = formData.handle;
+    user.name = formData.name;
 
     updateProfileMutation.mutate(user);
   };
@@ -72,6 +73,22 @@ export default function ProfileView() {
       <legend className="text-2xl font-extrabold gradient-text mb-2">
         Edit Your Profile
       </legend>
+
+      <div className="space-y-1.5">
+        <label htmlFor="name" className="form-label">Display Name</label>
+        <div className="relative">
+          <UserIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 pointer-events-none" />
+          <input
+            type="text"
+            className="input-modern w-full pl-10"
+            placeholder="Your Name"
+            {...register("name", {
+              required: "Display name is required",
+            })}
+          />
+        </div>
+        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+      </div>
 
       <div className="space-y-1.5">
         <label htmlFor="handle" className="form-label">Handle / Username</label>

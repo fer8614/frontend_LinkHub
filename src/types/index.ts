@@ -25,7 +25,7 @@ export type LoginFormProps = Pick<User, "email"> & {
   password: string;
 };
 
-export type ProfileFormProps = Pick<User, "handle" | "description">;
+export type ProfileFormProps = Pick<User, "handle" | "name" | "description">;
 
 export type SocialNetwork = {
   id: number;
