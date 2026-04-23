@@ -1,4 +1,5 @@
 import { useState, ChangeEvent, useEffect } from "react";
+import { Save } from "lucide-react";
 import { social } from "../data/social";
 import LinkHubInput from "../components/LinkHubInput";
 import { isValidUrl } from "../utils";
@@ -125,10 +126,11 @@ export default function LinkHubView() {
           />
         ))}
         <button
-          className="gradient-button w-full py-3 text-lg uppercase tracking-wider font-bold mt-8"
+          className="gradient-button w-full py-3 text-sm font-semibold uppercase tracking-wider flex items-center justify-center gap-2 mt-8"
           onClick={() => mutate(queryClient.getQueryData(["user"])!)}
         >
-          Save Changes
+          <Save className="w-4 h-4" />
+          <span>Save Changes</span>
         </button>
       </div>
     </>

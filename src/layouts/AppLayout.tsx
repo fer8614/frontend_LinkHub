@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Navigate } from "react-router-dom";
-import { ClipLoader } from "react-spinners";
+import { Loader2 } from "lucide-react";
 import { getUser } from "../api/LinkHubApi";
 import LinkHub from "../components/LinkHub";
 
@@ -15,7 +15,7 @@ export default function AppLayout() {
   if (isLoading)
     return (
       <div className="loading-container fixed inset-0 flex items-center justify-center">
-        <ClipLoader color="#36D7B7" loading={true} size={50} />
+        <Loader2 className="w-8 h-8 text-purple-400 animate-spin" />
       </div>
     );
   if (isError) {

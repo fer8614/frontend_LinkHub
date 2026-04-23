@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ChangeEvent } from "react";
+import { AtSign, FileText, ImagePlus, Save } from "lucide-react";
 import ErrorMessage from "../components/errorMessage";
 import { ProfileFormProps, User } from "../types";
 import { updateProfile, uploadImage } from "../api/LinkHubApi";
@@ -65,58 +66,70 @@ export default function ProfileView() {
 
   return (
     <form
-      className="card-modern-dark space-y-6"
+      className="card-modern space-y-6"
       onSubmit={handleSubmit(handleUserProfileForm)}
     >
-      <legend className="text-3xl font-black gradient-text text-center mb-8">
+      <legend className="text-2xl font-extrabold gradient-text mb-2">
         Edit Your Profile
       </legend>
-      <div className="grid grid-cols-1 gap-2">
+
+      <div className="space-y-1.5">
         <label htmlFor="handle" className="form-label">Handle / Username</label>
-        <input
-          type="text"
-          className="input-modern"
-          placeholder="your_username"
-          {...register("handle", {
-            required: "Handle or Username is required",
-          })}
-        />
+        <div className="relative">
+          <AtSign className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 pointer-events-none" />
+          <input
+            type="text"
+            className="input-modern w-full pl-10"
+            placeholder="your_username"
+            {...register("handle", {
+              required: "Handle or Username is required",
+            })}
+          />
+        </div>
         {errors.handle && <ErrorMessage>{errors.handle.message}</ErrorMessage>}
       </div>
 
-      <div className="grid grid-cols-1 gap-2">
+      <div className="space-y-1.5">
         <label htmlFor="description" className="form-label">Bio / Description</label>
-        <textarea
-          className="input-modern resize-none h-24"
-          placeholder="Tell people about yourself..."
-          {...register("description", {
-            required: "Description is required",
-          })}
-        />
+        <div className="relative">
+          <FileText className="absolute left-3.5 top-3.5 w-4 h-4 text-white/30 pointer-events-none" />
+          <textarea
+            className="input-modern w-full resize-none h-24 pl-10"
+            placeholder="Tell people about yourself..."
+            {...register("description", {
+              required: "Description is required",
+            })}
+          />
+        </div>
         {errors.description && (
           <ErrorMessage>{errors.description.message}</ErrorMessage>
         )}
       </div>
 
-      <div className="grid grid-cols-1 gap-2">
+      <div className="space-y-1.5">
         <label htmlFor="image" className="form-label">Profile Picture</label>
         <div className="relative">
-          <input
-            id="image"
-            type="file"
-            name="image"
-            className="input-modern cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-purple-500 file:to-pink-500 file:text-white hover:file:from-purple-600 hover:file:to-pink-600"
-            accept="image/*"
-            onChange={handleChange}
-          />
+          <div className="flex items-center gap-3 input-modern cursor-pointer">
+            <ImagePlus className="w-5 h-5 text-white/30 shrink-0" />
+            <input
+              id="image"
+              type="file"
+              name="image"
+              className="w-full text-sm text-white/60 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-purple-500/20 file:text-purple-300 hover:file:bg-purple-500/30 cursor-pointer"
+              accept="image/*"
+              onChange={handleChange}
+            />
+          </div>
         </div>
       </div>
 
-      <input
+      <button
         type="submit"
-        className="gradient-button w-full py-3 text-lg uppercase tracking-wider mt-8"
-        value="Save Changes"
-      />
+        className="gradient-button w-full py-3 text-sm font-semibold uppercase tracking-wider flex items-center justify-center gap-2 mt-4"
+      >
+        <Save className="w-4 h-4" />
+        <span>Save Changes</span>
+      </button>
     </form>
   );
 }

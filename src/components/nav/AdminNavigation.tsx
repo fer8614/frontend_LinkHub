@@ -1,4 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
+import { LogOut } from "lucide-react";
 
 export default function AdminNavigation() {
 
@@ -12,10 +13,11 @@ export default function AdminNavigation() {
 
   return (
     <button
-      className="gradient-button px-6 py-2 text-sm uppercase font-bold rounded-lg cursor-pointer hover:shadow-lg hover:shadow-purple-500/50"
+      className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-white/70 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/[0.15] rounded-lg cursor-pointer"
       onClick={logOut}
     >
-      Log Out
+      <LogOut className="w-4 h-4" />
+      <span>Log Out</span>
     </button>
     );
 }

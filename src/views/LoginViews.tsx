@@ -1,8 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react";
 import ErrorMessage from "../components/errorMessage";
 import { LoginFormProps } from "../types";
 import api from "../config/axios";
@@ -40,43 +39,50 @@ export default function LoginView() {
 
   return (
     <>
-      <h1 className="text-5xl font-black gradient-text mb-2">Welcome Back</h1>
-      <p className="text-white/60 text-lg mb-10">Sign in to your LinkHub account</p>
+      <div className="text-center lg:text-left mb-8">
+        <h1 className="text-4xl sm:text-5xl font-extrabold gradient-text mb-3">Welcome Back</h1>
+        <p className="text-white/50 text-base">Sign in to your LinkHub account</p>
+      </div>
 
       <form
         onSubmit={handleSubmit(handleLogin)}
-        className="card-modern space-y-6 mt-8"
+        className="card-modern space-y-5"
         noValidate
       >
-        <div className="grid grid-cols-1 space-y-2">
+        <div className="space-y-1.5">
           <label htmlFor="email" className="form-label">
             Email Address
           </label>
-          <input
-            id="email"
-            type="email"
-            placeholder="your@email.com"
-            className="input-modern"
-            {...register("email", {
-              required: "El Email es obligatorio",
-              pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: "E-mail no válido",
-              },
-            })}
-          />
+          <div className="relative">
+            <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 pointer-events-none" />
+            <input
+              id="email"
+              type="email"
+              placeholder="your@email.com"
+              className="input-modern w-full pl-10"
+              {...register("email", {
+                required: "El Email es obligatorio",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "E-mail no válido",
+                },
+              })}
+            />
+          </div>
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </div>
-        <div className="grid grid-cols-1 space-y-2">
+
+        <div className="space-y-1.5">
           <label htmlFor="password" className="form-label">
             Password
           </label>
           <div className="relative">
+            <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 pointer-events-none" />
             <input
               id="password"
               type={showCurrentPassword ? "text" : "password"}
               placeholder="••••••••"
-              className="input-modern"
+              className="input-modern w-full pl-10 pr-12"
               {...register("password", {
                 required: "El Password es obligatorio",
               })}
@@ -84,11 +90,9 @@ export default function LoginView() {
             <button
               type="button"
               onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-              className="absolute inset-y-0 right-0 pr-4 text-white/50 hover:text-white transition-colors"
+              className="absolute inset-y-0 right-0 pr-3.5 text-white/30 hover:text-white/60"
             >
-              <FontAwesomeIcon
-                icon={showCurrentPassword ? faEyeSlash : faEye}
-              />
+              {showCurrentPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
           </div>
           {errors.password && (
@@ -96,17 +100,19 @@ export default function LoginView() {
           )}
         </div>
 
-        <input
+        <button
           type="submit"
-          className="gradient-button w-full py-3 text-lg uppercase tracking-wider"
-          value="Sign In"
-        />
+          className="gradient-button w-full py-3 text-sm font-semibold uppercase tracking-wider flex items-center justify-center gap-2 mt-2"
+        >
+          <span>Sign In</span>
+          <ArrowRight className="w-4 h-4" />
+        </button>
       </form>
 
       <nav className="mt-8 text-center">
-        <p className="text-white/60 mb-3">Don't have an account?</p>
+        <p className="text-white/40 text-sm mb-2">Don't have an account?</p>
         <Link
-          className="gradient-text font-bold text-lg hover:opacity-80 transition-opacity"
+          className="gradient-text font-semibold text-base hover:opacity-80"
           to="/auth/register"
         >
           Create one here

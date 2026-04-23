@@ -1,19 +1,15 @@
-import { BookmarkSquareIcon, UserIcon } from "@heroicons/react/20/solid";
+import { Link2, UserCircle } from "lucide-react";
 import { ChangeEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { classNames } from "../utils";
 
 const tabs = [
-  { name: "Links", href: "/admin", icon: BookmarkSquareIcon },
-  { name: "My Profile", href: "/admin/profile", icon: UserIcon },
+  { name: "Links", href: "/admin", icon: Link2 },
+  { name: "My Profile", href: "/admin/profile", icon: UserCircle },
 ];
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function NavigationTabs() {
   const location = useLocation();
-
   const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -41,30 +37,25 @@ export default function NavigationTabs() {
       </div>
 
       <div className="hidden sm:block">
-        <nav className="flex space-x-2" aria-label="Tabs">
-          {tabs.map((tab) => (
-            <Link
-              key={tab.name}
-              to={tab.href}
-              className={classNames(
-                location.pathname === tab.href
-                  ? "gradient-text border-b-2 border-gradient-to-r from-purple-500 to-pink-500"
-                  : "nav-link",
-                "group inline-flex items-center py-3 px-4 text-lg font-semibold transition-all duration-300",
-              )}
-            >
-              <tab.icon
+        <nav className="flex gap-1 p-1 bg-white/[0.03] border border-white/[0.06] rounded-xl w-fit" aria-label="Tabs">
+          {tabs.map((tab) => {
+            const isActive = location.pathname === tab.href;
+            return (
+              <Link
+                key={tab.name}
+                to={tab.href}
                 className={classNames(
-                  location.pathname === tab.href
-                    ? "text-purple-400"
-                    : "text-white/50 group-hover:text-white/70",
-                  "-ml-0.5 mr-2 h-5 w-5 transition-colors",
+                  isActive
+                    ? "bg-white/[0.08] text-white border-white/[0.1]"
+                    : "text-white/50 hover:text-white/80 hover:bg-white/[0.04] border-transparent",
+                  "inline-flex items-center gap-2 py-2.5 px-5 text-sm font-medium rounded-lg border",
                 )}
-                aria-hidden="true"
-              />
-              <span>{tab.name}</span>
-            </Link>
-          ))}
+              >
+                <tab.icon className="w-4 h-4" />
+                <span>{tab.name}</span>
+              </Link>
+            );
+          })}
         </nav>
       </div>
     </div>

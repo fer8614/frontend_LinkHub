@@ -1,6 +1,6 @@
 import { Navigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ClipLoader } from "react-spinners";
+import { Loader2 } from "lucide-react";
 import { getUserByHandle } from "../api/LinkHubApi";
 import HandleData from "../components/HandleData";
 
@@ -16,7 +16,7 @@ export default function HandleView() {
   if (isLoading) 
     return (
       <div className="loading-container fixed inset-0 flex items-center justify-center">
-        <ClipLoader color="#36D7B7" loading={true} size={50} />
+        <Loader2 className="w-8 h-8 text-purple-400 animate-spin" />
       </div>
     );
   if (error) {
