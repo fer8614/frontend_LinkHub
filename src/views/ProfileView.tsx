@@ -27,12 +27,6 @@ export default function ProfileView() {
     onSuccess: (dataMessage) => {
       toast.success(dataMessage);
       queryClient.invalidateQueries({ queryKey: ["user"] });
-      queryClient.setQueryData(["user"], (prevData: User) => {
-        return {
-          ...prevData,
-          prevData: data,
-        };
-      });
     },
   });
 
